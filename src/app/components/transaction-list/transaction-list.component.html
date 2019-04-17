@@ -1,0 +1,45 @@
+<h1>{{title}}</h1>
+<h2>My Transactions</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="pull-right">
+            <button class="btn btn-success" (click)="addTransaction()">Add New Transaction</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Object Id</th>
+                    <th>Amount</th>
+                    <th>Merchant</th>
+                    <th>Balance Amount</th>
+                    <th>Account</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transaction of transactions" [class.active]="transaction === selectedTransaction" (click)="onSelect(transaction)">
+                    <td>{{transaction._id}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.merchant}}</td>
+                    <td>{{transaction.balanceAmount}}</td>
+                    <td>{{transaction.account}}</td>
+                    <td><button class="btn btn-danger" (click)="deleteTransaction(hero, $event)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div *ngIf="selectedTransaction">
+            <h2>
+                {{selectedTransaction.name | uppercase}} is my hero
+            </h2>
+            <button class="btn btn-primary" (click)="gotoDetail()">View Details</button>
+        </div>
+    </div>
+</div>
